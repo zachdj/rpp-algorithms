@@ -9,9 +9,10 @@
 
 from GraphUtils import *
 from random import *
+import time
 
 verbose = False  # enable/disable verbose mode
-g = Graph(filename="test-graphs/christofides")
+g = Graph(filename="test-graphs/dense5")
 
 # configuration variables
 max_it = 25
@@ -22,6 +23,8 @@ alpha = 1
 shortest_tour = None
 shortest_tour_path = None
 shortest_tour_cost = math.inf
+
+start_time = time.clock()
 
 while iteration_counter < max_it:
     iteration_counter += 1
@@ -187,6 +190,10 @@ while iteration_counter < max_it:
 
 # end outer while
 
+
+time_elapsed = time.clock() - start_time
+
 print("Done searching!\nBest tour found has cost %s" % shortest_tour_cost)
 print("Path before simplification routines:\n %s" % shortest_tour_path)
-print("Path before simplification routines:\n %s" % shortest_tour_path.get_edges())
+
+print("Time elapsed: %s ms" % (time_elapsed*1000))

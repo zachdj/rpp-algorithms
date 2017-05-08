@@ -14,7 +14,7 @@ class Graph(object):
         self.required = []
         self.consider_zero_disconnected = consider_zero_disconnected
         if filename is not None:
-            with open(filename+".txt", 'rt') as file:
+            with open(filename+".csv", 'rt') as file:
                 reader = csv.reader(file, delimiter=',')
                 row = next(reader, False)
                 self.num_vertices = len(row)
@@ -29,7 +29,7 @@ class Graph(object):
                     self.representation.append(row_contents)
                     row = next(reader, False)
 
-            with open(filename+"_required.txt", 'rt') as file:
+            with open(filename+"_required.csv", 'rt') as file:
                 reader = csv.reader(file, delimiter=',')
                 row = next(reader, False)
                 while row:

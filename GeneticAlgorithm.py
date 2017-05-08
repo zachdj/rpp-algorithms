@@ -14,10 +14,12 @@ from GraphUtils import *
 from copy import deepcopy
 import bisect
 import collections
+import time
 
 
-verbose = True  # enable/disable verbose mode
-g = Graph(filename="test-graphs/christofides")
+
+verbose = False  # enable/disable verbose mode
+g = Graph(filename="test-graphs/dense5")
 shortest_paths = {}
 # find shortest paths from all vertices to all other vertices
 for vertex in range(0, g.num_vertices):
@@ -109,6 +111,7 @@ def choice(population, weights):
 ########################## initialize and run GA ##########################
 required_edges = g.get_required()
 solution_pool = []
+start_time = time.clock()
 for i in range(0, population_size):
     # It's remotely possible, but EXTREMELY unlikely, that we would pick two identical orderings
     starting_solution = random.sample(required_edges, len(required_edges))
@@ -165,8 +168,10 @@ for chromosome in solution_pool:
         best_chromosome = chromosome
         best_chromosome_score = score
 
+time_elapsed = time.clock() - start_time
 print("Terminated.  Found tour with cost: %s" % (1/best_chromosome_score))
 print(best_chromosome)
+print("Time elapsed: %s ms" % (time_elapsed*1000))
 
 
 
