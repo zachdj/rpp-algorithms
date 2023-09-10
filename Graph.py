@@ -14,7 +14,7 @@ class Graph(object):
         self.required = []
         self.consider_zero_disconnected = consider_zero_disconnected
         if filename is not None:
-            with open(filename+".csv", 'rt') as file:
+            with open(filename + ".csv", 'rt') as file:
                 reader = csv.reader(file, delimiter=',')
                 row = next(reader, False)
                 self.num_vertices = len(row)
@@ -29,7 +29,7 @@ class Graph(object):
                     self.representation.append(row_contents)
                     row = next(reader, False)
 
-            with open(filename+"_required.csv", 'rt') as file:
+            with open(filename + "_required.csv", 'rt') as file:
                 reader = csv.reader(file, delimiter=',')
                 row = next(reader, False)
                 while row:
@@ -51,7 +51,7 @@ class Graph(object):
         # count edges
         self.num_edges = 0
         for i in range(0, self.num_vertices):
-            for j in range(i, self.num_vertices):
+            for j in range(0, self.num_vertices):
                 if i != j and self.is_connected(i, j):
                     self.num_edges += 1
 
@@ -72,27 +72,33 @@ class Graph(object):
         else:
             return False
 
-    # allows an edge to be mark as required or not required
     def set_required(self, i, j, new_val):
+        """
+        Allows an edge to be mark as required or not required
+        """
         if new_val:
             self.required[i][j] = 1
-            self.required[j][i] = 1
+            # self.required[j][i] = 1
         else:
             self.required[i][j] = 0
-            self.required[j][i] = 0
+            # self.required[j][i] = 0
 
-    # gets the weight of the edge between two vertices - returns infinity if they are not connected
     def get_weight(self, i, j):
+        """
+        Gets the weight of the edge between two vertices - returns infinity if they are not connected
+        """
         if self.is_connected(i, j):
             return self.representation[i][j]
         else:
             return math.inf
 
-    # returns a list of all required edges in the graph
     def get_required(self):
+        """
+        returns a list of all required edges in the graph
+        """
         required = []
         for i in range(0, self.num_vertices):
-            for j in range(i, self.num_vertices):
+            for j in range(0, self.num_vertices):
                 if self.is_required(i, j):
                     required.append((i, j))
 
@@ -132,4 +138,3 @@ class Graph(object):
                     break
 
         return edges
-

@@ -2,8 +2,11 @@ from Graph import *
 from Path import *
 
 
-# djikstra's algorithm starting at "source";  Returns a list of Path objects where list[i] is the shortest path from source to vertex i
-def djikstra(graph, source):
+def dijkstra(graph, source):
+    """
+    Dijkstra's algorithm starting at "source"
+    :return: a list of Path objects where list[i] is the shortest path from source to vertex i
+    """
     q = set()  # set of unvisited nodes
 
     dist = dict()  # dist[i] is distance from source to vertex i
@@ -53,8 +56,11 @@ def djikstra(graph, source):
 
     return shortest_paths
 
-# breadth-first search over the specified graph starting at vertex with index "start"
+
 def bfs(graph, start):
+    """
+    Breadth-first search over the specified graph starting at vertex with index "start"
+    """
     visited, queue = set(), [start]
     while queue:
         vertex = queue.pop(0)
