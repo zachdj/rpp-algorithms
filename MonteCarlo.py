@@ -12,7 +12,7 @@ from random import *
 import time
 
 verbose = False  # enable/disable verbose mode
-g = Graph(filename="test-graphs/sparse1")
+g = Graph(filename="test-graphs/sparse/sparse1")
 
 # configuration variables
 max_it = 25

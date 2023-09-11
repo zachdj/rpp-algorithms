@@ -1,5 +1,5 @@
 """
-    Contains functions to randomly generate directed, connected graphs
+    Contains functions to randomly generate graphs
 """
 
 from random import *
@@ -51,29 +51,29 @@ def generate(num_vertices, num_edges, num_required, min_weight=1, max_weight=30)
     # keeps track of how many edges are still required to add
     required_edges_to_add = num_required
 
-    # Create two partitions, auxS and auxT. Initially store all vertices in auxS.
-    auxS = set(range(num_vertices))
-    auxT = set()
+    # Create two partitions, aux_s and aux_t. Initially store all vertices in aux_s.
+    aux_s = set(range(num_vertices))
+    aux_t = set()
 
     # Pick a random node, and mark it as visited and the current node.
-    current_node = sample(list(auxS), 1).pop()
-    auxS.remove(current_node)
-    auxT.add(current_node)
+    current_node = sample(list(aux_s), 1).pop()
+    aux_s.remove(current_node)
+    aux_t.add(current_node)
 
     # Create a random connected graph.
-    while auxS:
+    while aux_s:
         # Randomly pick the next node to visit
         neighbor_node = sample(list(vertices), 1).pop()
         # If the new node hasn't been visited, add the edge from current to new.
-        if neighbor_node not in auxT:
+        if neighbor_node not in aux_t:
             edge = (current_node, neighbor_node)
             # print("Adding edge between %s and %s" % (current_node+1, neighbor_node+1))
             weight = randint(min_weight, max_weight)
             add_edge(representation, weight, current_node, neighbor_node)
             edges.add(edge)
             edges_to_add -= 1
-            auxS.remove(neighbor_node)
-            auxT.add(neighbor_node)
+            aux_s.remove(neighbor_node)
+            aux_t.add(neighbor_node)
         # Set the new node as the current node.
         current_node = neighbor_node
 
@@ -113,40 +113,40 @@ sg1 = generate(20, 57, 10)
 to_file(sg1, "test-graphs/sparse1")
 sg2 = generate(40, 234, 40)
 to_file(sg2, "test-graphs/sparse2")
-# sg3 = generate(60, 531, 100)
-# to_file(sg3, "test-graphs/sparse3")
-# sg4 = generate(80, 948, 190)
-# to_file(sg4, "test-graphs/sparse4")
-# sg5 = generate(100, 1485, 295)
-# to_file(sg5, "test-graphs/sparse5")
+sg3 = generate(60, 531, 100)
+to_file(sg3, "test-graphs/sparse3")
+sg4 = generate(80, 948, 190)
+to_file(sg4, "test-graphs/sparse4")
+sg5 = generate(100, 1485, 295)
+to_file(sg5, "test-graphs/sparse5")
 print("Done with sparse graphs")
 
 # moderate graphs - 25% of all possible edges
-# mg1 = generate(20, 95, 19)
-# to_file(mg1, "test-graphs/moderate1")
-# mg2 = generate(40, 290, 58)
-# to_file(mg2, "test-graphs/moderate2")
-# mg3 = generate(60, 885, 177)
-# to_file(mg3, "test-graphs/moderate3")
-# mg4 = generate(80, 1580, 316)
-# to_file(mg4, "test-graphs/moderate4")
-# mg5 = generate(100, 2475, 495)
-# to_file(mg5, "test-graphs/moderate5")
-# print("Done with moderate graphs")
+mg1 = generate(20, 95, 19)
+to_file(mg1, "test-graphs/moderate1")
+mg2 = generate(40, 290, 58)
+to_file(mg2, "test-graphs/moderate2")
+mg3 = generate(60, 885, 177)
+to_file(mg3, "test-graphs/moderate3")
+mg4 = generate(80, 1580, 316)
+to_file(mg4, "test-graphs/moderate4")
+mg5 = generate(100, 2475, 495)
+to_file(mg5, "test-graphs/moderate5")
+print("Done with moderate graphs")
 
 # dense graphs - 50% of all possible edges
-# dg1 = generate(20, 190, 38)
-# to_file(dg1, "test-graphs/dense1")
-# print("Done with dense1")
-# dg2 = generate(40, 780, 156)
-# to_file(dg2, "test-graphs/dense2")
-# print("Done with dense2")
-# dg3 = generate(60, 1770, 354)
-# to_file(dg3, "test-graphs/dense3")
-# print("Done with dense3")
-# dg4 = generate(80, 3160, 632)
-# to_file(dg4, "test-graphs/dense4")
-# print("Done with dense4")
-# dg5 = generate(100, 4950, 990)
-# to_file(dg5, "test-graphs/dense5")
-# print("Done with dense5")
+dg1 = generate(20, 190, 38)
+to_file(dg1, "test-graphs/dense1")
+print("Done with dense1")
+dg2 = generate(40, 780, 156)
+to_file(dg2, "test-graphs/dense2")
+print("Done with dense2")
+dg3 = generate(60, 1770, 354)
+to_file(dg3, "test-graphs/dense3")
+print("Done with dense3")
+dg4 = generate(80, 3160, 632)
+to_file(dg4, "test-graphs/dense4")
+print("Done with dense4")
+dg5 = generate(100, 4950, 990)
+to_file(dg5, "test-graphs/dense5")
+print("Done with dense5")
